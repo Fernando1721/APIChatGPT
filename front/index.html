@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pergunte ao GPT</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.8/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <label>Digite a pergunta:<input type="text" id="prompt" /></label>
+    <button onclick="enviar()">Perguntar</button>
+    <input type="text" id="completion" />
+    <script>
+      function enviar() {
+        const pergunta = document.getElementById("prompt").value;
+        axios
+          .post("http://localhost:4000/pergunte_ao_chatgpt", { prompt: pergunta })
+          .then((res) => {
+            document.getElementById("completion").value = res.data.completion;
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
+      }
+    </script>
+  </body>
+</html>
